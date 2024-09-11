@@ -14,8 +14,8 @@
             <!-- Email input -->
             <div data-mdb-input-init class="form-outline mb-4">
               <input
-                type="email"
-                id="form3Example3"
+                type="text"
+                v-model="username"
                 class="form-control form-control-lg"
                 placeholder="Ingrese Usuario"
               />
@@ -25,7 +25,7 @@
             <div data-mdb-input-init class="form-outline mb-3">
               <input
                 type="password"
-                id="form3Example4"
+                v-model="password"
                 class="form-control form-control-lg"
                 placeholder="Ingrese Contraseña"
               />
@@ -99,6 +99,25 @@
 <script>
 export default {
   name: "LoginForm",
+  data() {
+    return {
+      username: null,
+      password: null,
+    };
+  },
+  computed: {
+    formData() {
+      return {
+        username: this.username,
+        password: this.password,
+      };
+    },
+  },
+  watch: {
+    formData(newValue) {
+      console.log("el form data: ", newValue);
+    },
+  },
 };
 </script>
 
