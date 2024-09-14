@@ -54,6 +54,7 @@
                 data-mdb-ripple-init
                 class="btn btn-primary btn-lg"
                 style="padding-left: 2.5rem; padding-right: 2.5rem"
+                @click="handleLogin"
               >
                 Iniciar sesión
               </button>
@@ -97,6 +98,7 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
 export default {
   name: "LoginForm",
   data() {
@@ -113,9 +115,23 @@ export default {
       };
     },
   },
-  watch: {
-    formData(newValue) {
-      console.log("el form data: ", newValue);
+  methods: {
+    ...mapActions("shared_store", ["postEnty"]),
+    async handleLogin() {
+      console.log("Datos para el formulario: ", this.formData);
+      const params = {
+        url: `auth/login/`,
+        data: this.formData,
+        enty: "user",
+        mutation: "setState",
+      };
+
+      try {
+        await this.postEnty(params);
+        console.log("RESPUESTA SERVIDOR ok ");
+      } catch (error) {
+        console.log("RESPUESTA SERVIDOR: ", error);
+      }
     },
   },
 };
