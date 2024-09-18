@@ -1,7 +1,7 @@
 <template>
   <v-card>
     <v-container>
-      <v-row> </v-row>
+      <v-row>aca las pagina </v-row>
     </v-container>
   </v-card>
 </template>
