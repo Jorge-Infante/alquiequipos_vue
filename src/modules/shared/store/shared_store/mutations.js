@@ -1,4 +1,5 @@
 export const setState = (state, { key, value }) => {
+  console.log("EL ESTATE: ", state[key], key, state);
   state[key] = value;
 };
 export const removeState = (state, { key, keySearch, value }) => {

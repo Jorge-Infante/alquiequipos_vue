@@ -1,4 +1,5 @@
-import { apiClient } from "@/api/authApi";
+import { apiClient } from "@/api/api";
+import { authApiClient } from "@/api/authApi";
 
 export const getEnty = async ({ commit }, params) => {
   const url = `/api/${params.url}`;
@@ -12,6 +13,7 @@ export const postEnty = async ({ commit }, params) => {
   const res = await apiClient.post(url, params.data);
   console.log(` (* POST *), Url de la petición: ${url}`, res);
   commit(params.mutation, { key: params.enty, value: res.data });
+  return res;
 };
 export const patchEnty = async ({ commit }, params) => {
   console.log("(* PATCH *) data: ", params.data);
@@ -35,4 +37,12 @@ export const deleteEnty = async ({ commit }, params) => {
     keySearch: params.keySearch,
     value: res.data,
   });
+};
+export const loginApp = async ({ commit }, params) => {
+  console.log("(* LOGIN* ) data: ", params.data);
+  const url = `/api/${params.url}`;
+  const res = await authApiClient.post(url, params.data);
+  console.log(` (* LOGIN *), Url de la petición: ${url}`, res);
+  commit(params.mutation, { key: params.enty, value: res.data });
+  return res;
 };
