@@ -1,38 +1,41 @@
 <template>
-    <div>
-        <form @submit.prevent="submit">
-            <v-text-field 
-                v-model="first_name"
-                :error-messages="errorMessages.first_name"
-                label="First Name"
-            ></v-text-field>
+    <div class="container_formList" >
+        <form @submit.prevent="submit" style="width: 400px;">
+            <section class="v-text-fiel">
+                <v-text-field 
+                    v-model="first_name"
+                    :error-messages="errorMessages.first_name"
+                    label="First Name"
+                ></v-text-field>
 
-            <v-text-field
-                v-model="last_name"
-                :error-messages="errorMessages.last_name"
-                label="Last Name"
-            ></v-text-field>
+                <v-text-field
+                    v-model="last_name"
+                    :error-messages="errorMessages.last_name"
+                    label="Last Name"
+                ></v-text-field>
 
-            <v-text-field
-                v-model="username"
-                :error-messages="errorMessages.username"
-                label="Username"
-            ></v-text-field>
+                <v-text-field
+                    v-model="username"
+                    :error-messages="errorMessages.username"
+                    label="Username"
+                ></v-text-field>
 
-            <v-text-field
-                v-model="email"
-                :error-messages="errorMessages.email"
-                label="E-mail"
-            ></v-text-field>
+                <v-text-field
+                    v-model="email"
+                    :error-messages="errorMessages.email"
+                    label="E-mail"
+                ></v-text-field>
 
-            <v-text-field
-                v-model="password"
-                :type="'password'"
-                :error-messages="errorMessages.password"
-                label="Password"
-            ></v-text-field>
+                <v-text-field
+                    v-model="password"
+                    :type="'password'"
+                    :error-messages="errorMessages.password"
+                    label="Password"
+                ></v-text-field>
+            </section>
 
-            <v-checkbox
+            <section class="v-checkbox">
+                <v-checkbox
                 v-model="is_active"
                 :error-messages="errorMessages.is_active"
                 label="Active"
@@ -49,6 +52,9 @@
                 :error-messages="errorMessages.is_superuser"
                 label="Superuser"
             ></v-checkbox>
+            </section>
+
+            
 
             <v-btn type="submit">Submit</v-btn>
             <v-btn @click="handleReset">Clear</v-btn>
@@ -107,6 +113,11 @@ export default {
     }
 };
 </script>
-<style lang="">
+<style scoped>
+.v-checkbox{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
+}
 </style>

@@ -1,5 +1,5 @@
 <template lang="">
-    <div class="container">
+    <div class="container" >
     <table class="table table-hover">
       <thead>
         <tr>
@@ -63,3 +63,9 @@ export default {
         
     }
 </script>
+
+<style scoped>
+.container{
+    display: flex;
+}
+</style>

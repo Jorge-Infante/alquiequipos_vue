@@ -3,8 +3,12 @@
   <App />
 
   <div class = "container-Users-Layout">
-  <FormUsers />
-  <UsersList />
+  <div class="FormUser_Container">
+    <FormUsers />
+  </div>
+  <div class="UsersLisrt_Container">
+    <UsersList />
+  </div>
 
   </div>
   
@@ -30,6 +34,12 @@ export default {
   display: flex;
   justify-content: space-between;
   
+  
+}
+.FormUser_Container{
+  display: flex;
+ 
+
 }
 
 </style>
