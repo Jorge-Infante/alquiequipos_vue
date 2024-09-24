@@ -30,16 +30,27 @@ export default {
 
 <style>
 
-.container-Users-Layout{
+.container-Users-Layout {
   display: flex;
-  justify-content: space-between;
-  
+  margin-top: 30px;
+  flex-direction: row;
+  width: 100%; /* Asegúrate de que ocupe todo el ancho disponible */
   
 }
-.FormUser_Container{
-  display: flex;
- 
 
+.FormUser_Container {
+  flex: 0 0 40%; /* Ocupa el 40% del contenedor */
+  margin-right: 30px;
 }
 
+.UsersList_Container {
+  flex: 0 0 60%; /* Ocupa el 60% del contenedor */
+}
+
+/* Para asegurarte de que los elementos hijos no sobrepasen el contenedor */
+.FormUser_Container, 
+.UsersList_Container {
+  box-sizing: border-box; /* Evita que el padding o el border crezcan el tamaño de los elementos */
+  
+}
 </style>

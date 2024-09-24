@@ -1,5 +1,5 @@
 <template lang="">
-    <div class="container" >
+    <div class="container">
     <table class="table table-hover">
       <thead>
         <tr>
@@ -66,6 +66,18 @@ export default {
 
 <style scoped>
 .container{
-    display: flex;
+    width: 100%;
+    overflow-x: auto;
+}
+.table{
+    width: 100%; /* La tabla ocupa todo el ancho del contenedor */
+    table-layout: fixed; /* Distribuye uniformemente el ancho de las columnas */
+    
+}
+.container th, .table td {
+    border: 1px solid #ddd; /* Bordes de las celdas */
+    padding: 8px; /* Espaciado interno en las celdas */
+    text-align: left; /* Alineación del texto en las celdas */
+    word-wrap: break-word; /* Permite el ajuste de texto si es muy largo */
 }
 </style>

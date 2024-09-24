@@ -1,6 +1,6 @@
 <template>
     <div class="container_formList" >
-        <form @submit.prevent="submit" style="width: 400px;">
+        <form @submit.prevent="submit" class="table-Users"         >
             <section class="v-text-fiel">
                 <v-text-field 
                     v-model="first_name"
@@ -114,10 +114,13 @@ export default {
 };
 </script>
 <style scoped>
+
+
 .v-checkbox{
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
 
 }
 </style>
