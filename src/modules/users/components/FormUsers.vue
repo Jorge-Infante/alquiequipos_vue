@@ -5,19 +5,19 @@
                 <v-text-field 
                     v-model="first_name"
                     :error-messages="errorMessages.first_name"
-                    label="First Name"
+                    label="Nombre"
                 ></v-text-field>
 
                 <v-text-field
                     v-model="last_name"
                     :error-messages="errorMessages.last_name"
-                    label="Last Name"
+                    label="Apellido"
                 ></v-text-field>
 
                 <v-text-field
                     v-model="username"
                     :error-messages="errorMessages.username"
-                    label="Username"
+                    label="Usuario"
                 ></v-text-field>
 
                 <v-text-field
@@ -30,7 +30,7 @@
                     v-model="password"
                     :type="'password'"
                     :error-messages="errorMessages.password"
-                    label="Password"
+                    label="Contraseña"
                 ></v-text-field>
             </section>
 
@@ -38,7 +38,7 @@
                 <v-checkbox
                 v-model="is_active"
                 :error-messages="errorMessages.is_active"
-                label="Active"
+                label="Activo"
             ></v-checkbox>
 
             <v-checkbox
@@ -56,8 +56,8 @@
 
             
 
-            <v-btn type="submit">Submit</v-btn>
-            <v-btn @click="handleReset">Clear</v-btn>
+            <v-btn type="submit">Editar</v-btn>
+            <v-btn @click="handleReset">Limpiar</v-btn>
         </form>
     </div>
 </template>
@@ -82,6 +82,21 @@ export default {
                 is_active: "",
                 is_staff: "",
                 is_superuser: ""
+            },
+            form:{
+                "id": "",
+                "password": "",
+                "last_login": "",
+                "is_superuser": null,
+                "username": "",
+                "first_name": "",
+                "last_name": "",
+                "email": "",
+                "is_staff": null,
+                "is_active": null,
+                "date_joined": "",
+                "groups": [],
+                "user_permissions": []
             }
         };
     },

@@ -9,6 +9,7 @@
           <th class="text-left">Usuario</th>
           
           <th class="text-left">Email</th>
+          <th class="text-left">Opciones</th>
 
         </tr>
       </thead>
@@ -21,7 +22,7 @@
           <td>{{ item.username }}</td>
           
           <td>{{ item.email }}</td>
-          
+          <td><v-btn @click = "Eliminar(item.id)" >Eliminar</v-btn></td>
         </tr>  
       </tbody> 
      
@@ -35,6 +36,8 @@
 
 <script>
 import axios from 'axios';
+import { mapActions } from 'vuex';
+
 export default {    
         name: "UsersList",
         data(){
@@ -43,8 +46,14 @@ export default {
             }
         },
         methods: {
+            ...mapActions ("user_store",["EliminarUsurs"]),
             editar(id){
                 console.log(id);
+            },
+            Eliminar(id){
+                console.log("Este es el ID: "+id);
+                this.EliminarUsurs({Url:`users/${id}/`})
+
             }
                 
         },   
