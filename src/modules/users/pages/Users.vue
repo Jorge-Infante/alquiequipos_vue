@@ -36,7 +36,7 @@ export default {
     const params = {
       url: `users/`,
       enty: "users",
-      mutation: "setState",
+      mutation: "SET_GLOBAL_STATE",
     };
     this.getEnty(params);
   },
