@@ -1,5 +1,8 @@
 <template>
-  <v-card>
+ 
+ <h1>aca pages</h1>
+ <!-- <v-card>
+
     <v-table>
       <thead>
         <tr>
@@ -15,18 +18,18 @@
       </tbody>
     </v-table>
     <v-btn @click="showUsers">show</v-btn>
-  </v-card>
+  </v-card> -->
 </template>
 
 <script>
-import { mapActions, mapState } from "vuex";
+//import { mapActions, mapState } from "vuex";
 export default {
   name: "usersPage",
   computed: {
-    ...mapState("auth_store", ["user"]),
-    ...mapState("user_store", ["users"]),
+   // ...mapState("auth_store", ["user"]),
+   // ...mapState("user_store", ["users"]),
   },
-  methods: {
+ /* methods: {
     ...mapActions("shared_store", ["getEnty"]),
     showUsers() {
       console.log("usuarios: ", this.users);
@@ -39,12 +42,12 @@ export default {
       mutation: "SET_GLOBAL_STATE",
     };
     this.getEnty(params);
-  },
-  watch: {
+  },*/
+ /* watch: {
     users(newValue) {
       console.log("USUARIOOOOOOS:", newValue);
     },
-  },
+  },*/
 };
 </script>
 

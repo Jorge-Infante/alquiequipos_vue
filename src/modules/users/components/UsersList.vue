@@ -1,60 +1,92 @@
-<template>
-     <div class="table-container">
-      <v-data-table :items="items" :headers="headers"></v-data-table>
+<template lang="">
+    <div class="container">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th class="text-left">ID</th>
+          <th class="text-left">Nombre</th>
+          <th class="text-left">Apellido</th>
+          <th class="text-left">Usuario</th>
+          
+          <th class="text-left">Email</th>
+          <th class="text-left">Opciones</th>
+
+        </tr>
+      </thead>
+
+      <tbody class="table-group-divider">
+          <tr v-for="item in userList" :key="item.id" v-on:click= "editar(item.id)">
+          <td>{{ item.id }}</td>
+          <td>{{ item.first_name }}</td>
+          <td>{{ item.last_name }}</td>
+          <td>{{ item.username }}</td>
+          
+          <td>{{ item.email }}</td>
+          <td><v-btn @click = "Eliminar(item.id)" >Eliminar</v-btn></td>
+        </tr>  
+      </tbody> 
+     
+    </table>
+   
+
+
     </div>
 </template>
 
-<script setup>
-import { ref, onMounted } from 'vue';
+
+<script>
 import axios from 'axios';
+import { mapActions } from 'vuex';
 
-// Define la variable reactiva para los items
-const items = ref([]);
+export default {    
+        name: "UsersList",
+        data(){
+            return {
+                userList: null,
+            }
+        },
+        methods: {
+            ...mapActions ("user_store",["EliminarUsurs"]),
+            editar(id){
+                console.log(id);
+            },
+            Eliminar(id){
+                console.log("Este es el ID: "+id);
+                this.EliminarUsurs({Url:`users/${id}/`})
 
-// Define los encabezados de la tabla
-const headers = [
-    { text: 'ID', value: 'id' },
-    { text: 'Contraceña', value: 'password' },
-    { text: 'Nombre', value: 'first_name' },
-    { text: 'Apellido', value: 'last_name' },
-    { text: 'Usuario', value: 'username' },
-    { text: 'Correo', value: 'email' },
-    { text: 'is_staff', value: 'is_staff' },
-    { text: 'Activo', value: 'is_active' },
-    
-    { text: 'Grupos', value: 'groups' },
-    { text: 'Permiso', value: 'user_permissions' },
-];
-
-// Función para obtener los usuarios
-const fetchUsers = async () => {
-    try {
-        const data = await axios.get('http://213.199.42.70/api/users/'); // Reemplaza con tu URL de API
-        items.value = data.data; // Asigna los datos a la variable reactiva
-    } catch (error) {
-        console.error("Error al obtener los usuarios:", error);
+            }
+                
+        },   
+        mounted: function () {
+            let direction = "http://213.199.42.70/api/users/"; // Agrega "http://" al inicio
+            axios.get(direction).then(response => { // Cambia "data" a "response"
+            this.userList = response.data; // Asigna los datos a userList
+            console.log("Fetched data: ", response.data); // Loguea la respuesta
+            })   
+            .catch(error => {
+                console.error("Error fetching users:", error);
+                // Aquí puedes manejar el error de forma más específica
+            }); 
+        },
+        
+        
     }
-};
-
-// Llama a la función al montar el componente
-onMounted(() => {
-    fetchUsers();
-});
 </script>
-<style>
-.table-container {
-    display: flex;
-    flex-direction: column;
-    height: 90%; /* Ajusta según sea necesario */
-}
 
-.table-container .v-data-table {
-    flex-grow: 1; /* Esto permite que la tabla ocupe el espacio disponible */
-}
-
-.v-data-table .v-pagination {
-    position: absolute; /* Mantener la paginación en la parte inferior */
-    bottom: 0;
+<style scoped>
+.container{
     width: 100%;
+    overflow-x: auto;
+}
+.table{
+    width: 100%; /* La tabla ocupa todo el ancho del contenedor */
+    table-layout: fixed; /* Distribuye uniformemente el ancho de las columnas */
+    
+}
+.container th, .table td {
+    border: 1px solid #ddd; /* Bordes de las celdas */
+    padding: 8px; /* Espaciado interno en las celdas */
+    text-align: left; /* Alineación del texto en las celdas */
+    word-wrap: break-word; /* Permite el ajuste de texto si es muy largo */
 }
 </style>
