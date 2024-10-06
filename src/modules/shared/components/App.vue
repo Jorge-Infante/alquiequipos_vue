@@ -2,17 +2,13 @@
   <div class = "Container-app-shared">
       <div class ="Application">
 
-        <v-app-bar title="Application bar"><h1>aca la app 1</h1></v-app-bar>
+       <AppBar />
 
       </div>
       
       <v-navigation-drawer style="width: 200px;">
         <div class="custom-drawer-content">
-          <v-list>
-            <v-list-item>
-             <h1>Aca la app 2</h1>
-            </v-list-item>
-           </v-list>
+          <OptionsList />
         </div>
       </v-navigation-drawer>
      
@@ -22,7 +18,21 @@
   </div>
   
 </template>
+<script>
+import OptionsList from "@/modules/shared/components/sideList/OptionsList.vue"
+import AppBar from "@/modules/shared/components/ListHead/AppBar.vue"
+
+export default{
+  components: {
+    OptionsList,
+    AppBar,
+
+  }
+}
+
+
+</script>
 
 <style scoped>
-
+  
 </style>
