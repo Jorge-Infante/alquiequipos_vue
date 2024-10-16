@@ -8,4 +8,14 @@ export default createStore({
     shared_store,
     user_store,
   },
+  mutations: {
+    // Mutación global para modificar directamente el estado de cualquier módulo
+    SET_GLOBAL_STATE(state, { moduleName, key, value }) {
+      if (state[moduleName] && state[moduleName][key] !== undefined) {
+        state[moduleName][key] = value; // Cambia directamente el state
+      } else {
+        console.error(`El módulo o propiedad ${moduleName}.${key} no existe.`);
+      }
+    },
+  },
 });

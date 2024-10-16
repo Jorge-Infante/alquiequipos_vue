@@ -4,8 +4,18 @@ import { authApiClient } from "@/api/authApi";
 export const getEnty = async ({ commit }, params) => {
   const url = `/api/${params.url}`;
   const res = await apiClient.get(url);
-  console.log(` (* GET *), Url de la petición: ${url}`, res);
-  commit(params.mutation, { key: params.enty, value: res.data });
+  console.log(`(* GET *), Url de la petición: ${url}`, res);
+
+  // Llamar a la mutación global
+  commit(
+    "SET_GLOBAL_STATE",
+    {
+      moduleName: "user_store",
+      key: params.enty,
+      value: res.data,
+    },
+    { root: true }
+  );
 };
 export const postEnty = async ({ commit }, params) => {
   console.log("(* POST* ) data: ", params.data);
