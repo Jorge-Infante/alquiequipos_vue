@@ -11,7 +11,7 @@
             />
           </div>
           <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-            <form>
+            <form v-if="!loading" @submit.prevent="handleLogin"> <!-- Modificación aquí -->
               <!-- Email input -->
               <div data-mdb-input-init class="form-outline mb-4">
                 <input
@@ -19,6 +19,7 @@
                   v-model="username"
                   class="form-control form-control-lg"
                   placeholder="Ingrese Usuario"
+                  required
                 />
               </div>
 
@@ -29,11 +30,12 @@
                   v-model="password"
                   class="form-control form-control-lg"
                   placeholder="Ingrese Contraseña"
+                  required
                 />
               </div>
 
               <div class="d-flex justify-content-between align-items-center">
-                <!--olvido de contraseña link y checkBox -->
+                <!-- Olvido de contraseña link y checkBox -->
                 <div class="form-check mb-0">
                   <input
                     class="form-check-input me-2"
@@ -42,22 +44,22 @@
                     id="form2Example3"
                   />
                   <label class="form-check-label" for="form2Example3">
-                    Mostrar contrseña
+                    Mostrar contraseña
                   </label>
                 </div>
                 <a href="#!" class="text-body">¿Olvidaste la Contraseña?</a>
               </div>
 
-              <div
-                class="text-center text-align: center text-lg-start mt-4 pt-2"
-              >
+              <div class="text-center text-lg-start mt-4 pt-2">
                 <button
-                  type="button"
+                  type="submit" 
+                   
                   data-mdb-button-init
                   data-mdb-ripple-init
                   class="btn btn-primary btn-lg"
                   style="padding-left: 2.5rem; padding-right: 2.5rem"
-                  @click="handleLogin"
+                  :disabled="loading" 
+                 
                 >
                   Iniciar sesión
                 </button>
@@ -67,6 +69,11 @@
                 </p>
               </div>
             </form>
+
+            <!-- Imagen de carga --> <!-- Modificación aquí -->
+            <div v-if="loading" class="loading-overlay"> <!-- Modificación aquí -->
+              <img :src="loadingImage" alt="Cargando..." /> <!-- Modificación aquí -->
+            </div> <!-- Modificación aquí -->
           </div>
         </div>
       </div>
@@ -75,6 +82,7 @@
 </template>
 
 <script>
+import loadingImage from "@/assets/Moo.gif";
 import { mapActions } from "vuex";
 export default {
   name: "LoginForm",
@@ -82,6 +90,8 @@ export default {
     return {
       username: null,
       password: null,
+      loading: false, // Modificación aquí
+      loadingImage,
     };
   },
   computed: {
@@ -95,6 +105,7 @@ export default {
   methods: {
     ...mapActions("shared_store", ["loginApp"]),
     async handleLogin() {
+      this.loading = true; // Modificación aquí
       console.log("Datos para el formulario: ", this.formData);
       const params = {
         url: `auth/login/`,
@@ -104,6 +115,7 @@ export default {
       };
 
       try {
+        await new Promise((resolve) => setTimeout(resolve, 5000)); // Ajusta el tiempo (en milisegundos)
         const response = await this.loginApp(params);
         console.log("RESPUESTA SERVIDOR ", response.data);
         localStorage.setItem("accessToken", response.data.access);
@@ -111,6 +123,8 @@ export default {
         this.$router.push("/users");
       } catch (error) {
         console.log("RESPUESTA SERVIDOR: ", error);
+      } finally {
+        this.loading = false; // Modificación aquí
       }
     },
   },
@@ -130,4 +144,22 @@ export default {
   max-width: 100%;
   height: auto;
 }
+
+.loading-overlay { /* Modificación aquí */
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #ffffff;
+}
+
+.loading-overlay img {
+  max-width: 80%; /* Ajusta el tamaño máximo de la imagen */
+  max-height: 80%; /* Ajusta la altura máxima de la imagen */
+}
 </style>
+
